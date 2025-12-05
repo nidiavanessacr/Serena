@@ -1,3 +1,44 @@
 <resources>
+    <!-- APP -->
     <string name="app_name">Serena</string>
+
+    <!-- HOME / MAIN -->
+    <string name="titulo">💡 Control de Luces Serena</string>
+
+    <!-- LED ROJO -->
+    <string name="led_rojo">LED Rojo</string>
+    <string name="rojo_icon">🔴</string>
+
+    <!-- LED VERDE -->
+    <string name="led_verde">LED Verde</string>
+    <string name="verde_icon">🟢</string>
+
+    <!-- LED AZUL -->
+    <string name="led_azul">LED Azul</string>
+    <string name="azul_icon">🔵</string>
+
+    <!-- Botones -->
+    <string name="encender">Encender</string>
+    <string name="apagar">Apagar</string>
+    <string name="apagar_todo">Apagar Todo ⚫</string>
+
+    <!-- Estado -->
+    <string name="estado_desc">Estado: Desconectado ❌</string>
+
+    <!-- ===== ADMIN PANEL ===== -->
+    <string name="admin">Admin ⚙️</string>
+    <string name="admin_title">⚙️ Administrar Dispositivos</string>
+
+    <string name="add_section">Agregar LED</string>
+    <string name="edit_section">Editar LED</string>
+    <string name="delete_section">Eliminar LED</string>
+
+    <string name="input_id">ID</string>
+    <string name="input_desc">Descripción</string>
+
+    <string name="btn_add">Agregar</string>
+    <string name="btn_edit">Actualizar</string>
+    <string name="btn_delete">Eliminar</string>
+
+    <string name="btn_go_admin">Administrar LEDs</string>
 </resources>

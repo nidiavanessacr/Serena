@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/serena_bg"
+    tools:context=".AdminActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Título principal -->
+        <TextView
+            android:id="@+id/txtTituloAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Panel de Administración"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/serena_text_light"
+            android:layout_marginBottom="24dp" />
+
+        <!-- ================== SECCIÓN AGREGAR ================== -->
+        <TextView
+            android:id="@+id/txtAgregarTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar LED"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/serena_primary"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inputAddId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID"
+            android:inputType="number"
+            android:textColor="@color/serena_text_light"
+            android:textColorHint="@color/serena_text_light"
+            android:backgroundTint="@color/serena_primary"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inputAddDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            android:inputType="textCapSentences"
+            android:textColor="@color/serena_text_light"
+            android:textColorHint="@color/serena_text_light"
+            android:backgroundTint="@color/serena_primary"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnAddLed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar LED"
+            android:textStyle="bold"
+            android:textColor="@color/serena_text_light"
+            android:backgroundTint="@color/serena_primary_dark"
+            android:layout_marginBottom="24dp" />
+
+        <!-- ================== SECCIÓN EDITAR ================== -->
+        <TextView
+            android:id="@+id/txtEditarTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar descripción"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/serena_primary"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inputEditId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID del LED"
+            android:inputType="number"
+            android:textColor="@color/serena_text_light"
+            android:textColorHint="@color/serena_text_light"
+            android:backgroundTint="@color/serena_primary"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inputEditDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nueva descripción"
+            android:inputType="textCapSentences"
+            android:textColor="@color/serena_text_light"
+            android:textColorHint="@color/serena_text_light"
+            android:backgroundTint="@color/serena_primary"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnEditLed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actualizar LED"
+            android:textStyle="bold"
+            android:textColor="@color/serena_text_light"
+            android:backgroundTint="@color/serena_button_bg"
+            android:layout_marginBottom="24dp" />
+
+        <!-- ================== SECCIÓN ELIMINAR ================== -->
+        <TextView
+            android:id="@+id/txtEliminarTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminar LED"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/serena_primary"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inputDeleteId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID del LED"
+            android:inputType="number"
+            android:textColor="@color/serena_text_light"
+            android:textColorHint="@color/serena_text_light"
+            android:backgroundTint="@color/serena_primary"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnDeleteLed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eliminar LED"
+            android:textStyle="bold"
+            android:textColor="@color/serena_text_light"
+            android:backgroundTint="@color/serena_button_bg_dark"
+            android:layout_marginBottom="32dp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,25 +1,89 @@
 package com.vane.serena.network
 
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Url
+import retrofit2.Response
+import retrofit2.http.*
 
-// Interfaz que define cómo se hacen las peticiones HTTP
+/* ============================================================
+   🌐 INTERFAZ PARA COMUNICACIÓN CON LA API (RETROFIT)
+   ============================================================ */
+
 interface ApiService {
-    @GET
-    suspend fun getLedStatus(@Url url: String): Map<String, Any>
+
+    // -----------------------------------------------------------
+    // 🔍 OBTENER TODOS LOS LEDS
+    // -----------------------------------------------------------
+    @GET("/leds")
+    suspend fun getAllLeds(): Response<LedsResponse>
+
+
+    // -----------------------------------------------------------
+    // 💡 CAMBIAR ESTADO (ON/OFF)
+    // -----------------------------------------------------------
+    @PUT("/leds/{id}/status")
+    suspend fun updateStatus(
+        @Path("id") id: Int,
+        @Body body: StatusBody
+    ): Response<GenericResponse>
+
+
+    // -----------------------------------------------------------
+    // ➕ AGREGAR LED NUEVO
+    // -----------------------------------------------------------
+    @POST("/leds")
+    suspend fun addLed(
+        @Body body: AddLedBody
+    ): Response<GenericResponse>
+
+
+    // -----------------------------------------------------------
+    // ✏️ EDITAR DESCRIPCIÓN DE LED
+    // -----------------------------------------------------------
+    @PUT("/leds/{id}")
+    suspend fun updateDescription(
+        @Path("id") id: Int,
+        @Body body: DescriptionBody
+    ): Response<GenericResponse>
+
+
+    // -----------------------------------------------------------
+    // 🗑️ ELIMINAR LED
+    // -----------------------------------------------------------
+    @DELETE("/leds/{id}")
+    suspend fun deleteLed(
+        @Path("id") id: Int
+    ): Response<GenericResponse>
 }
 
-// Singleton para inicializar Retrofit
-object RetrofitClient {
-    private const val BASE_URL = "http://192.168.1.76:5000/"  // Cambia según tu IP Flask
 
-    val instance: ApiService by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
-    }
-}
+/* ============================================================
+   📦 MODELOS DE DATOS (REQUESTS & RESPONSES)
+   ============================================================ */
+
+data class LedsResponse(
+    val leds: List<LedItem>,
+    val mensaje: String
+)
+
+data class LedItem(
+    val id: Int,
+    val descripcion: String,
+    val status: Boolean
+)
+
+data class StatusBody(
+    val status: Boolean
+)
+
+data class AddLedBody(
+    val id: Int,
+    val descripcion: String,
+    val status: Boolean
+)
+
+data class DescriptionBody(
+    val descripcion: String
+)
+
+data class GenericResponse(
+    val mensaje: String
+)

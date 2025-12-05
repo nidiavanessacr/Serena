@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="Theme.Serena" parent="Theme.Material3.DynamicColors.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/serena_bg</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:buttonStyle">@style/Serena.Button.Dark</item>
+    </style>
+
+    <style name="Serena.Button.Dark" parent="Widget.Material3.Button">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:backgroundTint">@color/serena_button_bg</item>
+        <item name="android:textColor">@color/serena_text_light</item>
+    </style>
+
+</resources>

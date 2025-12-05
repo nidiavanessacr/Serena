@@ -1,5 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Serena" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- 🌈 Tema con Dynamic Color activado -->
+    <style name="Theme.Serena" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
+
+        <!-- Fondo personalizado -->
+        <item name="android:windowBackground">@color/serena_bg</item>
+
+        <!-- Tipografía global -->
+        <item name="android:fontFamily">@font/poppins</item>
+
+        <!-- Botones globales -->
+        <item name="android:buttonStyle">@style/Serena.Button</item>
+
+    </style>
+
+    <!-- Botones en modo oscuro o automático -->
+    <style name="Serena.Button" parent="Widget.Material3.Button">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
 </resources>

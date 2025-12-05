@@ -8,12 +8,12 @@
     android:background="#101820"
     tools:context=".MainActivity">
 
-    <!-- Título -->
+    <!-- TÍTULO -->
     <TextView
         android:id="@+id/txtTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="💡 Control de Luces Serena"
+        android:text="@string/titulo"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
@@ -22,75 +22,142 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón LED Rojo -->
-    <Button
-        android:id="@+id/btnRojo"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:text="Encender Rojo 🔴"
-        android:textStyle="bold"
+    <!-- LED ROJO -->
+    <TextView
+        android:id="@+id/txtRojo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/led_rojo"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#D72638"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/txtTitulo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Botón LED Verde -->
     <Button
-        android:id="@+id/btnVerde"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:text="Encender Verde 🟢"
-        android:textStyle="bold"
+        android:id="@+id/btnRojoOn"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:text="@string/encender"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D72638"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txtRojo"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btnRojoOff"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:text="@string/apagar"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#8A1A21"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txtRojo"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- LED VERDE -->
+    <TextView
+        android:id="@+id/txtVerde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/led_verde"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/btnRojoOn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnVerdeOn"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:text="@string/encender"
         android:textColor="#FFFFFF"
         android:backgroundTint="#1B998B"
-        app:layout_constraintTop_toBottomOf="@id/btnRojo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txtVerde"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Botón LED Azul -->
     <Button
-        android:id="@+id/btnAzul"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:text="Encender Azul 🔵"
-        android:textStyle="bold"
+        android:id="@+id/btnVerdeOff"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:text="@string/apagar"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#157063"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txtVerde"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- LED AZUL -->
+    <TextView
+        android:id="@+id/txtAzul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/led_azul"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/btnVerdeOn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnAzulOn"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:text="@string/encender"
         android:textColor="#FFFFFF"
         android:backgroundTint="#0077B6"
-        app:layout_constraintTop_toBottomOf="@id/btnVerde"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txtAzul"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Botón para apagar todos -->
+    <Button
+        android:id="@+id/btnAzulOff"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:text="@string/apagar"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#004E73"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txtAzul"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- APAGAR TODO -->
     <Button
         android:id="@+id/btnApagar"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="Apagar Todo ⚫"
-        android:textStyle="bold"
+        android:text="@string/apagar_todo"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:backgroundTint="#555555"
-        app:layout_constraintTop_toBottomOf="@id/btnAzul"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/btnAzulOn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Estado de conexión -->
+    <!-- ESTADO -->
     <TextView
         android:id="@+id/txtEstado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estado: Desconectado ❌"
+        android:text="@string/estado_desc"
         android:textColor="#AAAAAA"
         android:textSize="16sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/btnApagar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
