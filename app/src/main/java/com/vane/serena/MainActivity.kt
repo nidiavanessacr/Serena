@@ -1,5 +1,6 @@
 package com.vane.serena
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -25,11 +26,21 @@ class MainActivity : AppCompatActivity() {
         DynamicColors.applyToActivitiesIfAvailable(application)
 
         super.onCreate(savedInstanceState)
+
+        // 🔒 PROTEGER PANTALLA — si NO hay sesión → volver a login
+        verificarSesion()
+
         setContentView(R.layout.activity_main)
 
         // -----------------------------
-        // REFERENCIAS A BOTONES
+        // BOTÓN DE CERRAR SESIÓN
+        -----------------------------
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
+        btnLogout.setOnClickListener { cerrarSesion() }
+
         // -----------------------------
+        // REFERENCIAS A BOTONES
+        -----------------------------
         val btnRojoOn = findViewById<Button>(R.id.btnRojoOn)
         val btnRojoOff = findViewById<Button>(R.id.btnRojoOff)
 
@@ -59,9 +70,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =======================================================
+    // 🔒 VERIFICAR SESIÓN
+    // =======================================================
+    private fun verificarSesion() {
+        val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
+        val userId = prefs.getInt("user_id", -1)
+
+        if (userId == -1) {
+            // Nadie inició sesión → regresar al login
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    // =======================================================
+    // 🔘 CERRAR SESIÓN
+    // =======================================================
+    private fun cerrarSesion() {
+        val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
+        prefs.edit().clear().apply()
+
+        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
+    // =======================================================
     // MENÚ SUPERIOR (ENGRANE)
     // =======================================================
-
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -80,7 +121,6 @@ class MainActivity : AppCompatActivity() {
     // =======================================================
     // API FLASK
     // =======================================================
-
     private fun cambiarEstadoLED(id: Int, encender: Boolean, txtEstado: TextView) {
         CoroutineScope(Dispatchers.IO).launch {
             try {

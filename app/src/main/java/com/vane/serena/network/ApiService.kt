@@ -52,6 +52,19 @@ interface ApiService {
     suspend fun deleteLed(
         @Path("id") id: Int
     ): Response<GenericResponse>
+
+    // -----------------------------------------------------------
+    // ENDPOINT
+    // -----------------------------------------------------------
+    @POST("/login")
+    suspend fun loginUser(@Body body: LoginBody): Response<LoginResponse>
+
+    // -----------------------------------------------------------
+    // RETROFIT
+    // -----------------------------------------------------------
+    @POST("/register")
+    suspend fun registerUser(@Body body: RegisterBody): Response<RegisterResponse>
+
 }
 
 

@@ -1,5 +1,7 @@
 package com.vane.serena
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -20,6 +22,20 @@ class AdminActivity : AppCompatActivity() {
         DynamicColors.applyToActivitiesIfAvailable(application)
 
         super.onCreate(savedInstanceState)
+
+        // ============================================================
+        // 🔐 PROTEGER LA ACTIVIDAD (si no hay sesión, regresar a Login)
+        // ============================================================
+        val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
+        val userId = prefs.getInt("user_id", -1)
+
+        if (userId == -1) {
+            // Usuario NO logueado → mandarlo al LoginActivity
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.admin_activity)
 
         // Activar flecha de regreso en ActionBar

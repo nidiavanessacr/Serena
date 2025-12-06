@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permiso de Internet -->
+    <!-- Permiso para usar Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,22 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Serena">
 
-        <!-- Pantalla principal -->
+        <!-- ⭐ Pantalla inicial (LOGIN) ⭐ -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Serena">
-
+            android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- ⭐ ESTA ES LA QUE ESTAMOS AGREGANDO ⭐ -->
-        <activity android:name=".AdminActivity" />
+        <!-- ⭐ Pantalla inicial 2 (Registro) ⭐ -->
+        <activity android:name=".RegisterActivity" />
 
+
+        <!-- Pantalla principal después del login -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- Pantalla de administración -->
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
