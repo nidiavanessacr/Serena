@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Tema especial solo para el PREVIEW -->
+    <style name="Theme.Serena.Preview" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Para evitar que falle por colores dinámicos -->
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+</resources>

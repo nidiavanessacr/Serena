@@ -22,38 +22,45 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // 🌈 ACTIVAR MATERIAL YOU
+        // 🌈 ACTIVA MATERIAL YOU
         DynamicColors.applyToActivitiesIfAvailable(application)
 
         super.onCreate(savedInstanceState)
 
-        // 🔒 PROTEGER PANTALLA — si NO hay sesión → volver a login
+        // 🔒 Verificar sesión
         verificarSesion()
 
         setContentView(R.layout.activity_main)
 
-        // -----------------------------
-        // BOTÓN DE CERRAR SESIÓN
-        -----------------------------
-        val btnLogout = findViewById<Button>(R.id.btnLogout)
-        btnLogout.setOnClickListener { cerrarSesion() }
+        // ============================================================
+        // ⭐ MOSTRAR NOMBRE DEL USUARIO
+        // ============================================================
+        val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
+        val username = prefs.getString("username", "Usuario")
 
-        // -----------------------------
+        val txtBienvenida = findViewById<TextView>(R.id.txtBienvenidaMain)
+        txtBienvenida.text = getString(R.string.bienvenida, username)
+
+        // ============================================================
+        // 🔘 BOTÓN DE CERRAR SESIÓN
+        // ============================================================
+        findViewById<Button>(R.id.btnLogout).setOnClickListener { cerrarSesion() }
+
+        // ============================================================
         // REFERENCIAS A BOTONES
-        -----------------------------
+        // ============================================================
         val btnRojoOn = findViewById<Button>(R.id.btnRojoOn)
         val btnRojoOff = findViewById<Button>(R.id.btnRojoOff)
-
         val btnVerdeOn = findViewById<Button>(R.id.btnVerdeOn)
         val btnVerdeOff = findViewById<Button>(R.id.btnVerdeOff)
-
         val btnAzulOn = findViewById<Button>(R.id.btnAzulOn)
         val btnAzulOff = findViewById<Button>(R.id.btnAzulOff)
-
         val btnApagarTodo = findViewById<Button>(R.id.btnApagar)
         val txtEstado = findViewById<TextView>(R.id.txtEstado)
 
+        // ============================================================
         // EVENTOS
+        // ============================================================
         btnRojoOn.setOnClickListener { cambiarEstadoLED(ID_ROJO, true, txtEstado) }
         btnRojoOff.setOnClickListener { cambiarEstadoLED(ID_ROJO, false, txtEstado) }
 
@@ -65,7 +72,6 @@ class MainActivity : AppCompatActivity() {
 
         btnApagarTodo.setOnClickListener { apagarTodos(txtEstado) }
 
-        // Verificar conexión al iniciar
         verificarConexion(txtEstado)
     }
 
@@ -74,13 +80,12 @@ class MainActivity : AppCompatActivity() {
     // =======================================================
     private fun verificarSesion() {
         val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
-        val userId = prefs.getInt("user_id", -1)
-
-        if (userId == -1) {
-            // Nadie inició sesión → regresar al login
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+        if (prefs.getInt("user_id", -1) == -1) {
+            startActivity(
+                Intent(this, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            )
             finish()
         }
     }
@@ -92,11 +97,13 @@ class MainActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
         prefs.edit().clear().apply()
 
-        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.logout_btn), Toast.LENGTH_SHORT).show()
 
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        startActivity(
+            Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+        )
         finish()
     }
 
@@ -119,7 +126,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =======================================================
-    // API FLASK
+    // API FLASK — CAMBIAR ESTADO INDIVIDUAL
     // =======================================================
     private fun cambiarEstadoLED(id: Int, encender: Boolean, txtEstado: TextView) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -129,23 +136,38 @@ class MainActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     if (response.isSuccessful) {
-                        txtEstado.text = "Estado: Conectado ✅"
-                        Toast.makeText(this@MainActivity, "LED $id actualizado", Toast.LENGTH_SHORT).show()
+                        txtEstado.text = getString(R.string.estado_conectado)
+                        Toast.makeText(
+                            this@MainActivity,
+                            getString(R.string.toast_led_actualizado, id),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
-                        txtEstado.text = "Estado: Error con API ❌"
-                        Toast.makeText(this@MainActivity, "Error en la API", Toast.LENGTH_SHORT).show()
+                        txtEstado.text = getString(R.string.estado_error_api)
+                        Toast.makeText(
+                            this@MainActivity,
+                            getString(R.string.toast_error_api),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
             } catch (e: Exception) {
                 runOnUiThread {
-                    txtEstado.text = "Estado: Desconectado ❌"
-                    Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    txtEstado.text = getString(R.string.estado_desconectado)
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Error: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
     }
 
+    // =======================================================
+    // API FLASK — APAGAR TODOS
+    // =======================================================
     private fun apagarTodos(txtEstado: TextView) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -156,19 +178,25 @@ class MainActivity : AppCompatActivity() {
                 api.updateStatus(ID_AZUL, StatusBody(false))
 
                 runOnUiThread {
-                    txtEstado.text = "Estado: Conectado ✅"
-                    Toast.makeText(this@MainActivity, "Todos los LEDs apagados", Toast.LENGTH_SHORT).show()
+                    txtEstado.text = getString(R.string.estado_conectado)
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.toast_todos_apagados),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             } catch (e: Exception) {
                 runOnUiThread {
-                    txtEstado.text = "Estado: Desconectado ❌"
-                    Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    txtEstado.text = getString(R.string.estado_desconectado)
                 }
             }
         }
     }
 
+    // =======================================================
+    // API FLASK — VERIFICAR CONEXIÓN
+    // =======================================================
     private fun verificarConexion(txtEstado: TextView) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -177,15 +205,15 @@ class MainActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     if (response.isSuccessful) {
-                        txtEstado.text = "Estado: Conectado ✅"
+                        txtEstado.text = getString(R.string.estado_conectado)
                     } else {
-                        txtEstado.text = "Estado: Error al conectar ❌"
+                        txtEstado.text = getString(R.string.estado_error_conectar)
                     }
                 }
 
             } catch (e: Exception) {
                 runOnUiThread {
-                    txtEstado.text = "Estado: Desconectado ❌"
+                    txtEstado.text = getString(R.string.estado_desconectado)
                 }
             }
         }

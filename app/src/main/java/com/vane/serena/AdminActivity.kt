@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.color.DynamicColors
@@ -24,13 +25,12 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // ============================================================
-        // 🔐 PROTEGER LA ACTIVIDAD (si no hay sesión, regresar a Login)
+        // 🔐 PROTEGER LA ACTIVIDAD (solo si hay sesión)
         // ============================================================
         val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
         val userId = prefs.getInt("user_id", -1)
 
         if (userId == -1) {
-            // Usuario NO logueado → mandarlo al LoginActivity
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
@@ -38,12 +38,19 @@ class AdminActivity : AppCompatActivity() {
 
         setContentView(R.layout.admin_activity)
 
-        // Activar flecha de regreso en ActionBar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // -----------------------------
+        // ============================================================
+        // ⭐ MENSAJE DE BIENVENIDA
+        // ============================================================
+        val username = prefs.getString("username", "Usuario")
+        val txtBienvenida = findViewById<TextView>(R.id.txtBienvenida)
+        txtBienvenida.text = "Bienvenido, $username 👋"
+
+
+        // ============================================================
         // REFERENCIAS
-        // -----------------------------
+        // ============================================================
         val inputAddId = findViewById<EditText>(R.id.inputAddId)
         val inputAddDesc = findViewById<EditText>(R.id.inputAddDesc)
         val btnAddLed = findViewById<Button>(R.id.btnAddLed)
@@ -55,9 +62,23 @@ class AdminActivity : AppCompatActivity() {
         val inputDeleteId = findViewById<EditText>(R.id.inputDeleteId)
         val btnDeleteLed = findViewById<Button>(R.id.btnDeleteLed)
 
-        // -----------------------------
-        // AGREGAR LED
-        // -----------------------------
+        val btnLogoutAdmin = findViewById<Button>(R.id.btnLogoutAdmin)
+
+        // ============================================================
+        // 🔴 BOTÓN LOGOUT
+        // ============================================================
+        btnLogoutAdmin.setOnClickListener {
+            prefs.edit().clear().apply()
+            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+
+        // ============================================================
+        // ➕ AGREGAR LED
+        // ============================================================
         btnAddLed.setOnClickListener {
             val id = inputAddId.text.toString().toIntOrNull()
             val desc = inputAddDesc.text.toString()
@@ -70,9 +91,10 @@ class AdminActivity : AppCompatActivity() {
             agregarLED(id, desc)
         }
 
-        // -----------------------------
-        // EDITAR LED
-        // -----------------------------
+
+        // ============================================================
+        // ✏️ EDITAR LED
+        // ============================================================
         btnEditLed.setOnClickListener {
             val id = inputEditId.text.toString().toIntOrNull()
             val desc = inputEditDesc.text.toString()
@@ -85,9 +107,10 @@ class AdminActivity : AppCompatActivity() {
             editarLED(id, desc)
         }
 
-        // -----------------------------
-        // ELIMINAR LED
-        // -----------------------------
+
+        // ============================================================
+        // 🗑 ELIMINAR LED
+        // ============================================================
         btnDeleteLed.setOnClickListener {
             val id = inputDeleteId.text.toString().toIntOrNull()
 
@@ -100,7 +123,7 @@ class AdminActivity : AppCompatActivity() {
         }
     }
 
-    // Habilitar botón de regresar (flecha)
+
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
@@ -109,8 +132,9 @@ class AdminActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
     // ============================================================
-    // FUNCIONES DE API
+    // API
     // ============================================================
 
     private fun agregarLED(id: Int, descripcion: String) {
@@ -128,12 +152,11 @@ class AdminActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                runOnUiThread {
-                    showToast("Error al agregar LED: ${e.message}")
-                }
+                runOnUiThread { showToast("Error al agregar LED: ${e.message}") }
             }
         }
     }
+
 
     private fun editarLED(id: Int, descripcion: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -149,12 +172,11 @@ class AdminActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                runOnUiThread {
-                    showToast("Error al editar LED: ${e.message}")
-                }
+                runOnUiThread { showToast("Error al editar LED: ${e.message}") }
             }
         }
     }
+
 
     private fun eliminarLED(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -170,12 +192,11 @@ class AdminActivity : AppCompatActivity() {
                 }
 
             } catch (e: Exception) {
-                runOnUiThread {
-                    showToast("Error al eliminar LED: ${e.message}")
-                }
+                runOnUiThread { showToast("Error al eliminar LED: ${e.message}") }
             }
         }
     }
+
 
     private fun showToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

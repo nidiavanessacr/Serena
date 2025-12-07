@@ -22,6 +22,16 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/serena_text_light"
+            android:layout_marginBottom="12dp" />
+
+        <!-- ⭐ MENSAJE DE BIENVENIDA ⭐ -->
+        <TextView
+            android:id="@+id/txtBienvenida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenid@:  "
+            android:textSize="16sp"
+            android:textColor="@color/serena_text_light"
             android:layout_marginBottom="24dp" />
 
         <!-- ================== SECCIÓN AGREGAR ================== -->
@@ -141,6 +151,17 @@
             android:textColor="@color/serena_text_light"
             android:backgroundTint="@color/serena_button_bg_dark"
             android:layout_marginBottom="32dp" />
+
+        <!-- ================== BOTÓN LOGOUT ================== -->
+        <Button
+            android:id="@+id/btnLogoutAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Cerrar sesión"
+            android:textStyle="bold"
+            android:textColor="@color/serena_text_light"
+            android:backgroundTint="#C62828"
+            android:layout_marginBottom="40dp" />
 
     </LinearLayout>
 

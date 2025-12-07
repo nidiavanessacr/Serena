@@ -74,31 +74,50 @@ class LoginActivity : AppCompatActivity() {
                         val userId = response.body()?.user_id ?: -1
 
                         if (userId != -1) {
+
                             // ============================
-                            // GUARDAR SESIÓN
+                            // GUARDAR SESIÓN COMPLETA
                             // ============================
                             val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
                             prefs.edit()
                                 .putInt("user_id", userId)
+                                .putString("username", username)  // ⭐ Guardamos el nombre
                                 .apply()
 
-                            Toast.makeText(this@LoginActivity, "Bienvenido $username", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Bienvenido $username",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                             // Ir al MainActivity
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
+
                         } else {
-                            Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Credenciales incorrectas",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
                     } else {
-                        Toast.makeText(this@LoginActivity, "Error al iniciar sesión", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Error al iniciar sesión",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
             } catch (e: Exception) {
                 runOnUiThread {
-                    Toast.makeText(this@LoginActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Error: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }

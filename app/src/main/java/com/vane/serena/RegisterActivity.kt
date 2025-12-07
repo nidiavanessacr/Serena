@@ -1,6 +1,5 @@
 package com.vane.serena
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -32,12 +31,12 @@ class RegisterActivity : AppCompatActivity() {
             val pass2 = inputPassword2.text.toString().trim()
 
             if (username.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_fill_fields), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (pass1 != pass2) {
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_password_mismatch), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -64,29 +63,39 @@ class RegisterActivity : AppCompatActivity() {
                 runOnUiThread {
 
                     if (response.isSuccessful) {
-                        Toast.makeText(this@RegisterActivity, "Registro exitoso", Toast.LENGTH_SHORT).show()
-
-                        // OPCIONAL → Guardar sesión automática después del registro
-                        /*
-                        val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
-                        prefs.edit().putInt("user_id", 1).apply()
-                        */
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            getString(R.string.msg_register_success),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         // Ir a Login
                         startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                         finish()
 
                     } else if (response.code() == 409) {
-                        Toast.makeText(this@RegisterActivity, "El usuario ya existe", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            getString(R.string.msg_user_exists),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     } else {
-                        Toast.makeText(this@RegisterActivity, "Error al registrar", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            getString(R.string.msg_register_error),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
             } catch (e: Exception) {
                 runOnUiThread {
-                    Toast.makeText(this@RegisterActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Error: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }

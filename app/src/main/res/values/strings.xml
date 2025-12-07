@@ -1,4 +1,5 @@
 <resources>
+
     <!-- APP -->
     <string name="app_name">Serena</string>
 
@@ -17,7 +18,7 @@
     <string name="led_azul">LED Azul</string>
     <string name="azul_icon">🔵</string>
 
-    <!-- Botones -->
+    <!-- Botones LEDs -->
     <string name="encender">Encender</string>
     <string name="apagar">Apagar</string>
     <string name="apagar_todo">Apagar Todo ⚫</string>
@@ -41,4 +42,51 @@
     <string name="btn_delete">Eliminar</string>
 
     <string name="btn_go_admin">Administrar LEDs</string>
+
+    <!-- ===== LOGIN STRINGS ===== -->
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_username_hint">Usuario</string>
+    <string name="login_password_hint">Contraseña</string>
+    <string name="login_button">Ingresar</string>
+    <string name="login_create_account">Crear cuenta</string>
+
+    <!-- ===== REGISTER STRINGS ===== -->
+    <string name="register_title">Crear Cuenta</string>
+    <string name="register_user_hint">Usuario</string>
+    <string name="register_pass_hint">Contraseña</string>
+    <string name="register_pass2_hint">Repetir contraseña</string>
+
+    <string name="register_btn">Crear Cuenta</string>
+    <string name="register_login_btn">Iniciar sesión</string>
+
+    <!-- ===== MAIN ACTIVITY ===== -->
+    <string name="logout_btn">Salir</string>
+    <string name="bienvenida">Bienvenido, %1$s 👋</string>
+
+    <!-- LED labels -->
+    <string name="led_rojo_label">LED Rojo</string>
+    <string name="led_verde_label">LED Verde</string>
+    <string name="led_azul_label">LED Azul</string>
+
+    <!-- Estado -->
+    <string name="estado_conectado">Estado: Conectado ✅</string>
+    <string name="estado_error_api">Estado: Error con API ❌</string>
+    <string name="estado_desconectado">Estado: Desconectado ❌</string>
+    <string name="estado_error_conectar">Estado: Error al conectar ❌</string>
+
+    <!-- Toasts -->
+    <string name="toast_led_actualizado">LED %1$s actualizado</string>
+    <string name="toast_error_api">Error en la API</string>
+    <string name="toast_todos_apagados">Todos los LEDs apagados</string>
+
+    <!-- ===== CONTENT DESCRIPTIONS FALTANTES (accesibilidad) ===== -->
+    <string name="cd_encender_rojo">Encender rojo</string>
+    <string name="cd_apagar_rojo">Apagar rojo</string>
+
+    <string name="cd_encender_verde">Encender verde</string>
+    <string name="cd_apagar_verde">Apagar verde</string>
+
+    <string name="cd_encender_azul">Encender azul</string>
+    <string name="cd_apagar_azul">Apagar azul</string>
+
 </resources>
