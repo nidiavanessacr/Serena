@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Serena">
 
-        <!-- ⭐ Pantalla inicial (LOGIN) ⭐ -->
+        <!-- ⭐ SPLASH (Pantalla que inicia la app) ⭐ -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,19 +25,26 @@
             </intent-filter>
         </activity>
 
-        <!-- ⭐ Pantalla inicial 2 (Registro) ⭐ -->
-        <activity android:name=".RegisterActivity" />
+        <!-- Pantalla de LOGIN (después del splash) -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
 
+        <!-- Pantalla de REGISTRO -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
 
-        <!-- Pantalla principal después del login -->
+        <!-- Pantalla PRINCIPAL -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
-        <!-- Pantalla de administración -->
+        <!-- Pantalla ADMIN -->
         <activity
-            android:name=".AdminActivity"
+            android:name=".ConfigActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

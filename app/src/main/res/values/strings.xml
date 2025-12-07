@@ -61,7 +61,7 @@
 
     <!-- ===== MAIN ACTIVITY ===== -->
     <string name="logout_btn">Salir</string>
-    <string name="bienvenida">Bienvenido, %1$s 👋</string>
+    <string name="bienvenida">Bienvenido, %1$s</string>
 
     <!-- LED labels -->
     <string name="led_rojo_label">LED Rojo</string>
@@ -75,11 +75,11 @@
     <string name="estado_error_conectar">Estado: Error al conectar ❌</string>
 
     <!-- Toasts -->
-    <string name="toast_led_actualizado">LED %1$s actualizado</string>
+    <string name="toast_led_actualizado">LED %1$d actualizado</string>
     <string name="toast_error_api">Error en la API</string>
     <string name="toast_todos_apagados">Todos los LEDs apagados</string>
 
-    <!-- ===== CONTENT DESCRIPTIONS FALTANTES (accesibilidad) ===== -->
+    <!-- ===== CONTENT DESCRIPTIONS (Accesibilidad) ===== -->
     <string name="cd_encender_rojo">Encender rojo</string>
     <string name="cd_apagar_rojo">Apagar rojo</string>
 

@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_admin -> {
-                startActivity(Intent(this, AdminActivity::class.java))
+                startActivity(Intent(this, ConfigActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

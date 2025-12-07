@@ -16,12 +16,11 @@ import com.vane.serena.network.AddLedBody
 import com.vane.serena.network.DescriptionBody
 import com.vane.serena.network.RetrofitClient
 
-class AdminActivity : AppCompatActivity() {
+class ConfigActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         DynamicColors.applyToActivitiesIfAvailable(application)
-
         super.onCreate(savedInstanceState)
 
         // ============================================================
@@ -36,17 +35,15 @@ class AdminActivity : AppCompatActivity() {
             return
         }
 
-        setContentView(R.layout.admin_activity)
-
+        setContentView(R.layout.activity_config)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // ============================================================
-        // ⭐ MENSAJE DE BIENVENIDA
+        // ⭐ MENSAJE DE BIENVENIDA — seguro contra null
         // ============================================================
-        val username = prefs.getString("username", "Usuario")
+        val username = prefs.getString("username", null)
         val txtBienvenida = findViewById<TextView>(R.id.txtBienvenida)
-        txtBienvenida.text = "Bienvenido, $username 👋"
-
+        txtBienvenida.text = "Bienvenido, ${username ?: "Usuario"} 👋"
 
         // ============================================================
         // REFERENCIAS
@@ -65,7 +62,7 @@ class AdminActivity : AppCompatActivity() {
         val btnLogoutAdmin = findViewById<Button>(R.id.btnLogoutAdmin)
 
         // ============================================================
-        // 🔴 BOTÓN LOGOUT
+        // 🔴 LOGOUT
         // ============================================================
         btnLogoutAdmin.setOnClickListener {
             prefs.edit().clear().apply()
@@ -74,7 +71,6 @@ class AdminActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-
 
         // ============================================================
         // ➕ AGREGAR LED
@@ -91,7 +87,6 @@ class AdminActivity : AppCompatActivity() {
             agregarLED(id, desc)
         }
 
-
         // ============================================================
         // ✏️ EDITAR LED
         // ============================================================
@@ -106,7 +101,6 @@ class AdminActivity : AppCompatActivity() {
 
             editarLED(id, desc)
         }
-
 
         // ============================================================
         // 🗑 ELIMINAR LED
@@ -123,7 +117,9 @@ class AdminActivity : AppCompatActivity() {
         }
     }
 
-
+    // ============================================================
+    // FLECHA DE REGRESO
+    // ============================================================
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
@@ -132,11 +128,9 @@ class AdminActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     // ============================================================
-    // API
+    // 🟢 API: AGREGAR LED (ahora null-safe)
     // ============================================================
-
     private fun agregarLED(id: Int, descripcion: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -145,10 +139,11 @@ class AdminActivity : AppCompatActivity() {
                 val response = api.addLed(body)
 
                 runOnUiThread {
-                    if (response.isSuccessful)
+                    if (response.isSuccessful && response.body() != null) {
                         showToast(response.body()?.mensaje ?: "LED agregado correctamente")
-                    else
+                    } else {
                         showToast("Error: No se pudo agregar el LED")
+                    }
                 }
 
             } catch (e: Exception) {
@@ -157,7 +152,9 @@ class AdminActivity : AppCompatActivity() {
         }
     }
 
-
+    // ============================================================
+    // 🟡 API: EDITAR LED (ahora null-safe)
+    // ============================================================
     private fun editarLED(id: Int, descripcion: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -165,10 +162,11 @@ class AdminActivity : AppCompatActivity() {
                 val response = api.updateDescription(id, DescriptionBody(descripcion))
 
                 runOnUiThread {
-                    if (response.isSuccessful)
+                    if (response.isSuccessful && response.body() != null) {
                         showToast(response.body()?.mensaje ?: "Descripción actualizada")
-                    else
+                    } else {
                         showToast("Error al actualizar la descripción")
+                    }
                 }
 
             } catch (e: Exception) {
@@ -177,7 +175,9 @@ class AdminActivity : AppCompatActivity() {
         }
     }
 
-
+    // ============================================================
+    // 🔴 API: ELIMINAR LED (ahora null-safe)
+    // ============================================================
     private fun eliminarLED(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -185,10 +185,11 @@ class AdminActivity : AppCompatActivity() {
                 val response = api.deleteLed(id)
 
                 runOnUiThread {
-                    if (response.isSuccessful)
-                        showToast(response.body()?.mensaje ?: "LED eliminado")
-                    else
+                    if (response.isSuccessful && response.body() != null) {
+                        showToast(response.body()?.mensaje ?: "LED eliminado correctamente")
+                    } else {
                         showToast("Error al eliminar LED")
+                    }
                 }
 
             } catch (e: Exception) {
@@ -197,7 +198,9 @@ class AdminActivity : AppCompatActivity() {
         }
     }
 
-
+    // ============================================================
+    // 🟦 UTILIDAD
+    // ============================================================
     private fun showToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
