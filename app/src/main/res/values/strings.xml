@@ -89,4 +89,11 @@
     <string name="cd_encender_azul">Encender azul</string>
     <string name="cd_apagar_azul">Apagar azul</string>
 
+    <string name="msg_fill_fields">Por favor completa todos los campos</string>
+    <string name="msg_password_mismatch">Las contraseñas no coinciden</string>
+    <string name="msg_register_success">Cuenta creada correctamente</string>
+    <string name="msg_user_exists">El usuario ya existe</string>
+    <string name="msg_register_error">No se pudo crear la cuenta</string>
+
+
 </resources>

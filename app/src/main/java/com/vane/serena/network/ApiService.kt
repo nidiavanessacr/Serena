@@ -3,73 +3,61 @@ package com.vane.serena.network
 import retrofit2.Response
 import retrofit2.http.*
 
-/* ============================================================
-   🌐 INTERFAZ PARA COMUNICACIÓN CON LA API (RETROFIT)
-   ============================================================ */
+// ---------------------- LOGIN & REGISTER MODELS ----------------------
+import com.vane.serena.network.LoginBody
+import com.vane.serena.network.LoginResponse
+import com.vane.serena.network.RegisterBody
+import com.vane.serena.network.RegisterResponse
 
+/* ============================================================
+   🌐 INTERFAZ DE API PARA RETROFIT
+   ============================================================ */
 interface ApiService {
 
-    // -----------------------------------------------------------
-    // 🔍 OBTENER TODOS LOS LEDS
-    // -----------------------------------------------------------
+    // ---------------------- LEDS ------------------------------
+
     @GET("/leds")
     suspend fun getAllLeds(): Response<LedsResponse>
 
-
-    // -----------------------------------------------------------
-    // 💡 CAMBIAR ESTADO (ON/OFF)
-    // -----------------------------------------------------------
     @PUT("/leds/{id}/status")
     suspend fun updateStatus(
         @Path("id") id: Int,
         @Body body: StatusBody
     ): Response<GenericResponse>
 
-
-    // -----------------------------------------------------------
-    // ➕ AGREGAR LED NUEVO
-    // -----------------------------------------------------------
     @POST("/leds")
     suspend fun addLed(
         @Body body: AddLedBody
     ): Response<GenericResponse>
 
-
-    // -----------------------------------------------------------
-    // ✏️ EDITAR DESCRIPCIÓN DE LED
-    // -----------------------------------------------------------
     @PUT("/leds/{id}")
     suspend fun updateDescription(
         @Path("id") id: Int,
         @Body body: DescriptionBody
     ): Response<GenericResponse>
 
-
-    // -----------------------------------------------------------
-    // 🗑️ ELIMINAR LED
-    // -----------------------------------------------------------
     @DELETE("/leds/{id}")
     suspend fun deleteLed(
         @Path("id") id: Int
     ): Response<GenericResponse>
 
-    // -----------------------------------------------------------
-    // ENDPOINT
-    // -----------------------------------------------------------
+    // ---------------------- LOGIN -----------------------------
+
     @POST("/login")
-    suspend fun loginUser(@Body body: LoginBody): Response<LoginResponse>
+    suspend fun loginUser(
+        @Body body: LoginBody
+    ): Response<LoginResponse>
 
-    // -----------------------------------------------------------
-    // RETROFIT
-    // -----------------------------------------------------------
+    // ---------------------- REGISTER --------------------------
+
     @POST("/register")
-    suspend fun registerUser(@Body body: RegisterBody): Response<RegisterResponse>
-
+    suspend fun registerUser(
+        @Body body: RegisterBody
+    ): Response<RegisterResponse>
 }
 
-
 /* ============================================================
-   📦 MODELOS DE DATOS (REQUESTS & RESPONSES)
+   📦 MODELOS PARA LEDS
    ============================================================ */
 
 data class LedsResponse(

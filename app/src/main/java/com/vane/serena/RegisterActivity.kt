@@ -24,12 +24,15 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         val btnGoLogin = findViewById<Button>(R.id.btnGoLogin)
 
-        // =============== BOTÓN REGISTRAR ===============
+        // ================================
+        // BOTÓN: CREAR CUENTA
+        // ================================
         btnRegister.setOnClickListener {
             val username = inputUser.text.toString().trim()
             val pass1 = inputPassword.text.toString().trim()
             val pass2 = inputPassword2.text.toString().trim()
 
+            // Validaciones
             if (username.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
                 Toast.makeText(this, getString(R.string.msg_fill_fields), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -43,17 +46,21 @@ class RegisterActivity : AppCompatActivity() {
             registrarUsuario(username, pass1)
         }
 
-        // =============== VOLVER A LOGIN ===============
+        // ================================
+        // BOTÓN: IR A LOGIN
+        // ================================
         btnGoLogin.setOnClickListener {
-            finish() // vuelve a Login
+            finish()
         }
     }
 
     // ============================================================
-    // FUNCIÓN PARA REGISTRAR EN LA API
+    // FUNCIÓN PARA REGISTRAR USUARIO EN LA API
     // ============================================================
     private fun registrarUsuario(username: String, password: String) {
+
         CoroutineScope(Dispatchers.IO).launch {
+
             try {
                 val api = RetrofitClient.instance
                 val body = RegisterBody(username, password)
@@ -62,38 +69,43 @@ class RegisterActivity : AppCompatActivity() {
 
                 runOnUiThread {
 
-                    if (response.isSuccessful) {
-                        Toast.makeText(
-                            this@RegisterActivity,
-                            getString(R.string.msg_register_success),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    when {
+                        response.isSuccessful -> {
+                            Toast.makeText(
+                                this@RegisterActivity,
+                                response.body()?.mensaje ?: getString(R.string.msg_register_success),
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                        // Ir a Login
-                        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                        finish()
+                            // Ir al login
+                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                            finish()
+                        }
 
-                    } else if (response.code() == 409) {
-                        Toast.makeText(
-                            this@RegisterActivity,
-                            getString(R.string.msg_user_exists),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        response.code() == 409 -> {
+                            Toast.makeText(
+                                this@RegisterActivity,
+                                getString(R.string.msg_user_exists),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
-                    } else {
-                        Toast.makeText(
-                            this@RegisterActivity,
-                            getString(R.string.msg_register_error),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        else -> {
+                            Toast.makeText(
+                                this@RegisterActivity,
+                                "Error API: código ${response.code()}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
 
             } catch (e: Exception) {
+
                 runOnUiThread {
                     Toast.makeText(
                         this@RegisterActivity,
-                        "Error: ${e.message}",
+                        "Excepción: ${e.message}",
                         Toast.LENGTH_LONG
                     ).show()
                 }
