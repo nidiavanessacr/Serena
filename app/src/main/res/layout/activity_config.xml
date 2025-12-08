@@ -13,6 +13,18 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <!-- 🔙 BOTÓN REGRESAR -->
+        <Button
+            android:id="@+id/btnRegresar"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="◀ Regresar"
+            android:textStyle="bold"
+            android:textColor="@color/serena_text_light"
+            android:backgroundTint="#333333"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="12dp" />
+
         <!-- Título principal -->
         <TextView
             android:id="@+id/txtTituloAdmin"

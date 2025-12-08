@@ -36,18 +36,18 @@ class ConfigActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_config)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // ============================================================
-        // ⭐ MENSAJE DE BIENVENIDA — seguro contra null
+        // ⭐ MENSAJE DE BIENVENIDA
         // ============================================================
         val username = prefs.getString("username", null)
         val txtBienvenida = findViewById<TextView>(R.id.txtBienvenida)
         txtBienvenida.text = "Bienvenido, ${username ?: "Usuario"} 👋"
 
-        // ============================================================
+
+        // ==============================
         // REFERENCIAS
-        // ============================================================
+        // ==============================
         val inputAddId = findViewById<EditText>(R.id.inputAddId)
         val inputAddDesc = findViewById<EditText>(R.id.inputAddDesc)
         val btnAddLed = findViewById<Button>(R.id.btnAddLed)
@@ -60,6 +60,17 @@ class ConfigActivity : AppCompatActivity() {
         val btnDeleteLed = findViewById<Button>(R.id.btnDeleteLed)
 
         val btnLogoutAdmin = findViewById<Button>(R.id.btnLogoutAdmin)
+        val btnRegresar = findViewById<Button>(R.id.btnRegresar)
+
+
+        // ============================================================
+        // 🔙 BOTÓN REGRESAR A MAIN
+        // ============================================================
+        btnRegresar.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         // ============================================================
         // 🔴 LOGOUT
@@ -118,18 +129,7 @@ class ConfigActivity : AppCompatActivity() {
     }
 
     // ============================================================
-    // FLECHA DE REGRESO
-    // ============================================================
-    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    // ============================================================
-    // 🟢 API: AGREGAR LED (ahora null-safe)
+    // API: AGREGAR LED
     // ============================================================
     private fun agregarLED(id: Int, descripcion: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -153,7 +153,7 @@ class ConfigActivity : AppCompatActivity() {
     }
 
     // ============================================================
-    // 🟡 API: EDITAR LED (ahora null-safe)
+    // API: EDITAR LED
     // ============================================================
     private fun editarLED(id: Int, descripcion: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -176,7 +176,7 @@ class ConfigActivity : AppCompatActivity() {
     }
 
     // ============================================================
-    // 🔴 API: ELIMINAR LED (ahora null-safe)
+    // API: ELIMINAR LED
     // ============================================================
     private fun eliminarLED(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -199,7 +199,7 @@ class ConfigActivity : AppCompatActivity() {
     }
 
     // ============================================================
-    // 🟦 UTILIDAD
+    // UTILIDAD
     // ============================================================
     private fun showToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

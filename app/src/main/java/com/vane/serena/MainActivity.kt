@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -42,9 +43,16 @@ class MainActivity : AppCompatActivity() {
         txtBienvenida.text = getString(R.string.bienvenida, username)
 
         // ============================================================
-        // 🔘 BOTÓN DE CERRAR SESIÓN
+        // 🔘 BOTÓN DE CERRAR SESIÓN (ABAJO)
         // ============================================================
         findViewById<Button>(R.id.btnLogout).setOnClickListener { cerrarSesion() }
+
+        // ============================================================
+        // ⚙️ BOTÓN AJUSTES (ENGRANE ARRIBA)
+        // ============================================================
+        findViewById<ImageButton>(R.id.btnAjustes).setOnClickListener {
+            startActivity(Intent(this, ConfigActivity::class.java))
+        }
 
         // ============================================================
         // REFERENCIAS A BOTONES
@@ -105,24 +113,6 @@ class MainActivity : AppCompatActivity() {
             }
         )
         finish()
-    }
-
-    // =======================================================
-    // MENÚ SUPERIOR (ENGRANE)
-    // =======================================================
-    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_admin -> {
-                startActivity(Intent(this, ConfigActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     // =======================================================
