@@ -1,19 +1,19 @@
 <resources>
 
-    <!-- 🎨 Fondos -->
+    <!-- Fondos -->
     <color name="serena_bg">#101820</color>        <!-- Fondo oscuro por defecto -->
     <color name="serena_bg_light">#F2F2F7</color> <!-- Fondo modo claro -->
     <color name="serena_bg_dark">#000000</color>  <!-- Fondo profundo para night mode -->
 
-    <!-- 🎨 Colores principales -->
+    <!-- Colores principales -->
     <color name="serena_primary">#4DD0E1</color>       <!-- Acento claro -->
     <color name="serena_primary_dark">#0097A7</color>  <!-- Acento oscuro -->
 
-    <!-- 🎨 Texto -->
+    <!-- Texto -->
     <color name="serena_text_light">#FFFFFF</color> <!-- Texto en fondos oscuros -->
     <color name="serena_text_dark">#1A1A1A</color>  <!-- Texto en fondos claros -->
 
-    <!-- 🎨 Botones -->
+    <!-- Botones -->
     <color name="serena_button_bg">#2E3A47</color>        <!-- Botón modo oscuro -->
     <color name="serena_button_bg_light">#D9E6F2</color>  <!-- Botón modo claro -->
     <color name="serena_button_bg_dark">#0D1B2A</color>   <!-- Botón night mode -->

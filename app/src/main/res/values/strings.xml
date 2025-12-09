@@ -69,10 +69,10 @@
     <string name="led_azul_label">LED Azul</string>
 
     <!-- Estado -->
-    <string name="estado_conectado">Estado: Conectado ✅</string>
-    <string name="estado_error_api">Estado: Error con API ❌</string>
-    <string name="estado_desconectado">Estado: Desconectado ❌</string>
-    <string name="estado_error_conectar">Estado: Error al conectar ❌</string>
+    <string name="estado_conectado">Estado: Conectado</string>
+    <string name="estado_error_api">Estado: Error con API</string>
+    <string name="estado_desconectado">Estado: Desconectado</string>
+    <string name="estado_error_conectar">Estado: Error al conectar</string>
 
     <!-- Toasts -->
     <string name="toast_led_actualizado">LED %1$d actualizado</string>

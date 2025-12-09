@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- 🌈 Tema con Dynamic Color activado -->
+    <!-- Tema con Dynamic Color activado -->
     <style name="Theme.Serena" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
 
         <!-- Fondo personalizado -->

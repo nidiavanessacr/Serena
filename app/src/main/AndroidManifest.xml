@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permiso para usar Internet -->
+    <!-- Permisos de Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Serena">
 
-    <!-- ⭐ SPLASH (Pantalla que inicia la app) ⭐ -->
+    <!-- SPLASH (Pantalla que inicia la app) -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">

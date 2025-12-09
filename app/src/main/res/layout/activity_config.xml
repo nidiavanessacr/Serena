@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- 🔙 BOTÓN REGRESAR -->
+        <!-- BOTÓN REGRESAR -->
         <Button
             android:id="@+id/btnRegresar"
             android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
             android:textColor="@color/serena_text_light"
             android:layout_marginBottom="12dp" />
 
-        <!-- ⭐ MENSAJE DE BIENVENIDA ⭐ -->
+        <!-- MENSAJE DE BIENVENIDA -->
         <TextView
             android:id="@+id/txtBienvenida"
             android:layout_width="wrap_content"

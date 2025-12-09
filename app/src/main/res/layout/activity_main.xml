@@ -8,7 +8,7 @@
     android:background="#101820"
     tools:context=".MainActivity">
 
-    <!-- ⚙️ BOTÓN AJUSTES ARRIBA A LA DERECHA -->
+    <!-- BOTÓN AJUSTES ARRIBA A LA DERECHA -->
     <ImageButton
         android:id="@+id/btnAjustes"
         android:layout_width="40dp"
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ⭐ MENSAJE DE BIENVENIDA ⭐ -->
+    <!-- MENSAJE DE BIENVENIDA -->
     <TextView
         android:id="@+id/txtBienvenidaMain"
         android:layout_width="wrap_content"
@@ -187,7 +187,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- 🔘 BOTÓN LOGOUT ABAJO -->
+    <!-- BOTÓN LOGOUT ABAJO -->
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"

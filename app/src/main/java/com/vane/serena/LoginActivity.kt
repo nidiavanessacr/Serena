@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
                             val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
                             prefs.edit()
                                 .putInt("user_id", userId)
-                                .putString("username", username)  // ⭐ Guardamos el nombre
+                                .putString("username", username)  // Guardamos el nombre
                                 .apply()
 
                             Toast.makeText(

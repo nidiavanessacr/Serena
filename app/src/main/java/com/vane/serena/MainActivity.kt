@@ -23,18 +23,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // 🌈 ACTIVA MATERIAL YOU
+        // ACTIVA MATERIAL YOU
         DynamicColors.applyToActivitiesIfAvailable(application)
 
         super.onCreate(savedInstanceState)
 
-        // 🔒 Verificar sesión
+        // Verificar sesión
         verificarSesion()
 
         setContentView(R.layout.activity_main)
 
         // ============================================================
-        // ⭐ MOSTRAR NOMBRE DEL USUARIO
+        // MOSTRAR NOMBRE DEL USUARIO
         // ============================================================
         val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
         val username = prefs.getString("username", "Usuario")
@@ -43,12 +43,12 @@ class MainActivity : AppCompatActivity() {
         txtBienvenida.text = getString(R.string.bienvenida, username)
 
         // ============================================================
-        // 🔘 BOTÓN DE CERRAR SESIÓN (ABAJO)
+        // BOTÓN DE CERRAR SESIÓN (ABAJO)
         // ============================================================
         findViewById<Button>(R.id.btnLogout).setOnClickListener { cerrarSesion() }
 
         // ============================================================
-        // ⚙️ BOTÓN AJUSTES (ENGRANE ARRIBA)
+        // BOTÓN AJUSTES (ENGRANE ARRIBA)
         // ============================================================
         findViewById<ImageButton>(R.id.btnAjustes).setOnClickListener {
             startActivity(Intent(this, ConfigActivity::class.java))
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =======================================================
-    // 🔒 VERIFICAR SESIÓN
+    // VERIFICAR SESIÓN
     // =======================================================
     private fun verificarSesion() {
         val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =======================================================
-    // 🔘 CERRAR SESIÓN
+    // CERRAR SESIÓN
     // =======================================================
     private fun cerrarSesion() {
         val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)

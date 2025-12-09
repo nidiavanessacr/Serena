@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://10.0.2.2:5000/"
+    private const val BASE_URL = "http://192.168.84.49:5000/" //IP DE FLASK
 
     val instance: ApiService by lazy {
         Retrofit.Builder()

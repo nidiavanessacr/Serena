@@ -24,7 +24,7 @@ class ConfigActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // ============================================================
-        // 🔐 PROTEGER LA ACTIVIDAD (solo si hay sesión)
+        // PROTECCIÓN DE ACCESO (solo si hay sesión)
         // ============================================================
         val prefs = getSharedPreferences("serena_prefs", Context.MODE_PRIVATE)
         val userId = prefs.getInt("user_id", -1)
@@ -38,11 +38,11 @@ class ConfigActivity : AppCompatActivity() {
         setContentView(R.layout.activity_config)
 
         // ============================================================
-        // ⭐ MENSAJE DE BIENVENIDA
+        // MENSAJE DE BIENVENIDA
         // ============================================================
         val username = prefs.getString("username", null)
         val txtBienvenida = findViewById<TextView>(R.id.txtBienvenida)
-        txtBienvenida.text = "Bienvenido, ${username ?: "Usuario"} 👋"
+        txtBienvenida.text = "Bienvenido, ${username ?: "Usuario"} "
 
 
         // ==============================
@@ -64,7 +64,7 @@ class ConfigActivity : AppCompatActivity() {
 
 
         // ============================================================
-        // 🔙 BOTÓN REGRESAR A MAIN
+        // BOTÓN REGRESAR A MAIN
         // ============================================================
         btnRegresar.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -73,7 +73,7 @@ class ConfigActivity : AppCompatActivity() {
         }
 
         // ============================================================
-        // 🔴 LOGOUT
+        // LOGOUT
         // ============================================================
         btnLogoutAdmin.setOnClickListener {
             prefs.edit().clear().apply()
@@ -84,7 +84,7 @@ class ConfigActivity : AppCompatActivity() {
         }
 
         // ============================================================
-        // ➕ AGREGAR LED
+        // AGREGAR LED
         // ============================================================
         btnAddLed.setOnClickListener {
             val id = inputAddId.text.toString().toIntOrNull()
@@ -99,7 +99,7 @@ class ConfigActivity : AppCompatActivity() {
         }
 
         // ============================================================
-        // ✏️ EDITAR LED
+        // EDITAR LED
         // ============================================================
         btnEditLed.setOnClickListener {
             val id = inputEditId.text.toString().toIntOrNull()

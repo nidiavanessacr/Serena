@@ -3,18 +3,18 @@ package com.vane.serena.network
 import retrofit2.Response
 import retrofit2.http.*
 
-// ---------------------- LOGIN & REGISTER MODELS ----------------------
+// MODELOS DE LOGIN Y REGISTRO
 import com.vane.serena.network.LoginBody
 import com.vane.serena.network.LoginResponse
 import com.vane.serena.network.RegisterBody
 import com.vane.serena.network.RegisterResponse
 
 /* ============================================================
-   🌐 INTERFAZ DE API PARA RETROFIT
+   INTERFAZ DE LA API PARA RETROFIT
    ============================================================ */
 interface ApiService {
 
-    // ---------------------- LEDS ------------------------------
+    // LEDS
 
     @GET("/leds")
     suspend fun getAllLeds(): Response<LedsResponse>
@@ -41,14 +41,14 @@ interface ApiService {
         @Path("id") id: Int
     ): Response<GenericResponse>
 
-    // ---------------------- LOGIN -----------------------------
+    // LOGIN
 
     @POST("/login")
     suspend fun loginUser(
         @Body body: LoginBody
     ): Response<LoginResponse>
 
-    // ---------------------- REGISTER --------------------------
+    // REGISTRO
 
     @POST("/register")
     suspend fun registerUser(
@@ -57,7 +57,7 @@ interface ApiService {
 }
 
 /* ============================================================
-   📦 MODELOS PARA LEDS
+   MODELOS PARA LEDS
    ============================================================ */
 
 data class LedsResponse(
