@@ -44,7 +44,6 @@ class ConfigActivity : AppCompatActivity() {
         val txtBienvenida = findViewById<TextView>(R.id.txtBienvenida)
         txtBienvenida.text = "Bienvenido, ${username ?: "Usuario"} "
 
-
         // ==============================
         // REFERENCIAS
         // ==============================
@@ -61,7 +60,6 @@ class ConfigActivity : AppCompatActivity() {
 
         val btnLogoutAdmin = findViewById<Button>(R.id.btnLogoutAdmin)
         val btnRegresar = findViewById<Button>(R.id.btnRegresar)
-
 
         // ============================================================
         // BOTÓN REGRESAR A MAIN
@@ -95,7 +93,11 @@ class ConfigActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            agregarLED(id, desc)
+            agregarLED(id, desc) {
+                // LIMPIAR CAMPOS TRAS ÉXITO
+                inputAddId.text.clear()
+                inputAddDesc.text.clear()
+            }
         }
 
         // ============================================================
@@ -110,7 +112,11 @@ class ConfigActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            editarLED(id, desc)
+            editarLED(id, desc) {
+                // LIMPIAR CAMPOS TRAS ÉXITO
+                inputEditId.text.clear()
+                inputEditDesc.text.clear()
+            }
         }
 
         // ============================================================
@@ -124,14 +130,17 @@ class ConfigActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            eliminarLED(id)
+            eliminarLED(id) {
+                // LIMPIAR CAMPO TRAS ÉXITO
+                inputDeleteId.text.clear()
+            }
         }
     }
 
     // ============================================================
     // API: AGREGAR LED
     // ============================================================
-    private fun agregarLED(id: Int, descripcion: String) {
+    private fun agregarLED(id: Int, descripcion: String, onSuccess: () -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val api = RetrofitClient.instance
@@ -141,6 +150,7 @@ class ConfigActivity : AppCompatActivity() {
                 runOnUiThread {
                     if (response.isSuccessful && response.body() != null) {
                         showToast(response.body()?.mensaje ?: "LED agregado correctamente")
+                        onSuccess() // ← LIMPIA LOS CAMPOS
                     } else {
                         showToast("Error: No se pudo agregar el LED")
                     }
@@ -155,7 +165,7 @@ class ConfigActivity : AppCompatActivity() {
     // ============================================================
     // API: EDITAR LED
     // ============================================================
-    private fun editarLED(id: Int, descripcion: String) {
+    private fun editarLED(id: Int, descripcion: String, onSuccess: () -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val api = RetrofitClient.instance
@@ -164,6 +174,7 @@ class ConfigActivity : AppCompatActivity() {
                 runOnUiThread {
                     if (response.isSuccessful && response.body() != null) {
                         showToast(response.body()?.mensaje ?: "Descripción actualizada")
+                        onSuccess() // ← LIMPIA LOS CAMPOS
                     } else {
                         showToast("Error al actualizar la descripción")
                     }
@@ -178,7 +189,7 @@ class ConfigActivity : AppCompatActivity() {
     // ============================================================
     // API: ELIMINAR LED
     // ============================================================
-    private fun eliminarLED(id: Int) {
+    private fun eliminarLED(id: Int, onSuccess: () -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val api = RetrofitClient.instance
@@ -187,6 +198,7 @@ class ConfigActivity : AppCompatActivity() {
                 runOnUiThread {
                     if (response.isSuccessful && response.body() != null) {
                         showToast(response.body()?.mensaje ?: "LED eliminado correctamente")
+                        onSuccess() // ← LIMPIA EL CAMPO
                     } else {
                         showToast("Error al eliminar LED")
                     }

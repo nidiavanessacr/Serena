@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Texto -->
+    <!-- Texto superior -->
     <TextView
         android:id="@+id/txtNombreApp"
         android:layout_width="wrap_content"
@@ -31,7 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"/>
-
 
     <!-- BARRA DE CARGA -->
     <ProgressBar
@@ -47,5 +46,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
+
+    <!-- DESARROLLADO POR:  -->
+    <TextView
+        android:id="@+id/txtDesarrollado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desarrollado por: GalloConTennis"
+        android:textColor="@color/serena_text_light"
+        android:textSize="14sp"
+        android:alpha="0.8"
+        app:layout_constraintTop_toBottomOf="@id/progressBarSplash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
